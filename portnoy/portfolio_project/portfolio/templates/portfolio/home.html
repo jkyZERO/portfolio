@@ -1,0 +1,66 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+    
+    <section id="skills">
+        <h2 class="section-title neon-text">Skills</h2>
+        <div class="grid-container">
+            {% for skill in skills %}
+                <div class="card">
+                    <!-- Карточка для каждого навыка -->
+                    <h3>{{ skill.name }}</h3>
+                    <p>{{ skill.description }}</p>
+                    
+                    {% if user.is_authenticated %}
+                        <!-- Проверяем, вошел ли пользователь в систему -->
+                        <div class="card-actions">
+                            <!-- Действия с карточкой, доступные только аутентифицированным пользователям -->
+                            <a href="{% url 'edit_skill' skill.pk %}" class="btn btn-primary">Edit</a>
+                            <!-- Ссылка для редактирования навыка -->
+                            <a href="{% url 'delete_skill' skill.pk %}" class="btn btn-secondary">Delete</a>
+                            <!---ссылка на удаление-->
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="projects">
+        <!-- Раздел для отображения проектов -->
+        <h2 class="section-title neon-text">Projects</h2>
+        <div class="grid-container">
+            {% for project in projects %}
+                <div class="card">
+                    <h3>{{ project.title }}</h3>
+                    
+                    {% if project.image %}
+                        <!-- Проверяем, есть ли изображение у проекта -->
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    {% endif %}
+                    
+                    <p>{{ project.description }}</p>
+                    <!-- Отображаем описание проекта -->
+                    <p>Skills: {{ project.skills.all|join:", " }}</p>
+                    <!-- Отображаем навыки, использованные в проекте, через запятую -->
+                    
+                    <div class="card-actions">
+                        {% if project.url %}
+                            <!-- Проверяем, есть ли у проекта ссылка -->
+                            <a href="{{ project.url }}" target="_blank" class="btn btn-primary">View Project</a>
+                        {% endif %}
+                        
+                        {% if user.is_authenticated %}
+                            <!-- Проверяем, вошел ли пользователь в систему -->
+                            <a href="{% url 'edit_project' project.pk %}" class="btn btn-primary">Edit</a>
+                            <!-- Ссылка для редактирования проекта -->
+                            <a href="{% url 'delete_project' project.pk %}" class="btn btn-secondary">Delete</a>
+                            <!-- Ссылка для удаления проекта -->
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+

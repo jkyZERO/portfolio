@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <!-- Название страницы -->
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1 class="neon-text">My Portfolio</h1>
+
+        <nav>
+            <!-- Навигационное меню -->
+            <a href="{% url 'home' %}">Home</a>
+            <!-- Ссылка на главную страницу -->
+
+            {% if user.is_authenticated %}
+                <!-- Проверяем, вошел ли пользователь в систему -->
+                <a href="{% url 'add_skill' %}">Add Skill</a>
+                <!-- Ссылка на добавление навыка, видна только аутентифицированным пользователям -->
+
+                <a href="{% url 'add_project' %}">Add Project</a>
+                <!-- Ссылка на добавление проекта, видна только аутентифицированным пользователям -->
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        <!-- Основное содержание страницы -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>
+            Maxim Sviridenko 
+            Project Portfolio</p>
+
+        <div class="social-buttons">
+            <a href="https://github.com/jkyZERO" target="_blank" class="btn btn-github">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="{% url 'contact' %}" class="btn btn-contact">
+                <i class="fas fa-envelope"></i> Contact
+            </a>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

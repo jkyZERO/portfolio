@@ -1,0 +1,36 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+
+<section id="contact">
+    <h2 class="section-title">Contact Me</h2>
+    
+    <form class="contact-form">
+        <!-- Форма для отправки сообщения -->
+        
+        <div class="form-group">
+            <!-- Группа элементов формы для имени -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <!-- Поле ввода для имени, обязательное для заполнения -->
+        </div>
+        
+        <div class="form-group">
+            <!-- Группа элементов формы для email -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <!-- Поле ввода для email, обязательное для заполнения -->
+        </div>
+        
+        <div class="form-group">
+            <!-- Группа элементов формы для сообщения -->
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <!-- Текстовая область для сообщения, обязательная для заполнения -->
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+</section>
+
+{% endblock %}

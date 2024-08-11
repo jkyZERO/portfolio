@@ -1,0 +1,15 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+  <h2 class="section-title">Confirm delete</h2>
+  <div class="card">
+    <p>You sure to delete?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-secondary">Confirm</button>
+    </form>
+    <a href="{% url 'home' %}" class="btn btn-primary">Cancewl</a>
+
+
+  </div>
+  {% endblock %}

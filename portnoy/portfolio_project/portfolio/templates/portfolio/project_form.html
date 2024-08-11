@@ -1,0 +1,31 @@
+{% extends 'portfolio/base.html' %}
+<!-- Наследуемся от базового шаблона base.html -->
+
+{% block content %}
+    <!-- Определяем блок контента, который будет вставлен в базовый шаблон -->
+    
+    <h2 class="section-title">
+        {% if form.instance.pk %}
+            Edit
+        {% else %}
+            Add
+        {% endif %}
+
+        {% if 'skill' in request.path %}
+            <!-- Если в пути запроса есть 'skill', заголовок будет "Skill" -->
+            Skill
+        {% else %}
+            <!-- В противном случае заголовок будет "Project" -->
+            Project
+        {% endif %}
+    </h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Токен защиты от CSRF-атак -->
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+{% endblock %}
+
